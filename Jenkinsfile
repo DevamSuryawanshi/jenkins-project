@@ -18,11 +18,20 @@ pipeline {
                 '''
             }
         }
+
+        stage('Terraform Init & Plan') {
+            steps {
+                sh '''
+                    terraform init
+                    terraform plan
+                '''
+            }
+        }
     }
     
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Pipeline completed successfully with Terraform!'
         }
         failure {
             echo 'Pipeline failed. Check stage logs for details.'
